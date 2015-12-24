@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "StudentModel.h"
+#import <AFNetworking.h>
 
 @interface ViewController : NSViewController <NSTableViewDelegate,NSTableViewDataSource>
 

@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 yang. All rights reserved.
 //
 
+#import <AFNetworking.h>
+#import <sqlite3.h>
+
 #import "ViewController.h"
 #import "StudentModel.h"
 #import "SqliteOperation.h"
-#import <sqlite3.h>
-//#import "TableRowItems.h"
+
+static NSString* const BaseURLString = @"http://www.raywenderlich.com/demos/weather_sample/";
 @interface ViewController()
 {
     NSArray* columnID;
@@ -36,6 +39,8 @@
 @property (unsafe_unretained) IBOutlet NSMatrix *NameOrNumberMatrix;
 
 
+//AFNetworking Test
+@property NSDictionary* weather;
 @end
 @implementation ViewController
 
@@ -343,6 +348,15 @@
     _datasource[row][changedColumn] = data;
     [self.InfoTable reloadData];
 }
+- (IBAction)conductButton:(id)sender {
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://example.com/resources.json" parameters:nil success:^(AFHTTPRequestOperation* operation, id responseObject) {
+        failure:NSLog(@"JSON:%@", responseObject);
+    } failure:^(AFHTTPRequestOperation* operation, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 
 -(void)insertStudentToSqlite:(sqlite3*)database toTable:(NSString*)table
 {
